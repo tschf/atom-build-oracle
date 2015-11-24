@@ -1,5 +1,4 @@
 set linesize 200
-set tab off
 set serveroutput on
 
 COLUMN MY_USER FORMAT A20

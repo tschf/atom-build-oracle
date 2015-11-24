@@ -1,5 +1,6 @@
 set linesize 200
 set serveroutput on
+set verify off
 
 COLUMN MY_USER FORMAT A20
 COLUMN DB FORMAT A20

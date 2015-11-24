@@ -7,7 +7,6 @@ then
     exit 1
 fi
 
-exit 2
 echo "Running"
 echo "host: $1"
 echo "port: $2"

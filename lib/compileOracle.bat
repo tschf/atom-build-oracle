@@ -7,6 +7,7 @@ echo user: %4
 REM echo password: %5
 REM echo Compiling file: %6
 REM echo Compile script: %7
+echo sql interpreter: %8
 )
 
-C:\sqlcl\bin\sql.bat %4/%5@%1:%2/%3 @%6 %7
+%8 %4/%5@%1:%2/%3 @%6 %7

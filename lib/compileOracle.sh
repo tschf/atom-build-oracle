@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [[ "$#" -ne 7 ]]
+if [[ "$#" -ne 8 ]]
 then
     echo "Invalid number of args"
-    echo "Received $# expected 6"
+    echo "Received $# expected 8"
     exit 1
 fi
 
@@ -15,5 +15,8 @@ echo "user: $4"
 # echo "password: $5"
 echo "Compiling file: $7"
 #echo "Compile script: $7"
+echo "Interpreter path: $8"
 
-sqlplus $4/$5@$1:$2/$3 @$6 $7
+
+
+$8 $4/$5@$1:$2/$3 @$6 $7

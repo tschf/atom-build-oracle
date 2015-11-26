@@ -3,15 +3,13 @@ set serveroutput on
 set verify off
 
 COLUMN MY_USER FORMAT A20
-COLUMN DB FORMAT A20
-COLUMN SID FORMAT A10
-COLUMN NOW FORMAT A35
+COLUMN DB FORMAT A15
+COLUMN NOW FORMAT A40
 
 --Show the details of the connection for confirmation
     select
         user as MY_USER
       , ora_database_name as DB
-      --, '$3' as SID
       , systimestamp as NOW
     from dual;
 
@@ -19,7 +17,6 @@ COLUMN NOW FORMAT A35
 
 COLUMN MY_USER 	CLEAR
 COLUMN DB 	    CLEAR
-COLUMN SID 	    CLEAR
 COLUMN NOW 	    CLEAR
 
 show error

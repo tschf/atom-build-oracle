@@ -34,9 +34,9 @@ fi
 #print_debug
 
 
-INTERPRER_PATH=$(which ${SQL_INTERPRETER})
+INTERPRETER_PATH=$(which ${SQL_INTERPRETER})
 
-if [[ ! -x ${INTERPRER_PATH} ]]; then
+if [[ ! -x ${INTERPRETER_PATH} ]]; then
     echo "${SQL_INTERPRETER} either can not be found on the system, or is not executable" >&2
     exit 2
 fi

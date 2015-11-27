@@ -1,6 +1,6 @@
 {
     "name" : "build-oracle",
-    "version" : "0.0.1",
+    "version" : "0.1.0",
     "description" : "Build Oracle code",
     "repository" : "https://github.com/tschf/atom-oracle-build",
     "license" : "MIT",

@@ -1,7 +1,7 @@
 #!/bin/bash
 # DEFINE EXIT CODES
 INTERPRETER_NOT_FOUND=1
-
+TIMEOUT=2
 
 PKG_DIR=$1
 SQL_INTERPRETER=$2
@@ -18,7 +18,7 @@ function makeFifo {
     rm -f ${FIFO_PATH}
     mkdir -p ${TMP_DIR}
     mkfifo ${FIFO_PATH}
-    setsid tail -f ${FIFO_PATH} | ${INTERPRETER_PATH} /nolog &
+    (tail -f ${FIFO_PATH} | ${INTERPRETER_PATH} /nolog &)
     debug "Process started with pid $!"
 }
 
@@ -36,10 +36,6 @@ if [[ ! -x ${INTERPRETER_PATH} ]]; then
 fi
 
 > ${DEBUG_FILE}
-if [[ ! -x ${INTERPRETER_PATH} ]]; then
-    echo "${SQL_INTERPRETER} either can not be found on the system, or is not executable" >&2
-    exit 2
-fi
 
 if [[ -e ${FIFO_PATH} ]]; then
 #The fifo already exists, so lets check if sqlcl is running behind it
@@ -67,12 +63,13 @@ if [[ -e ${FIFO_PATH} ]]; then
             debug "Didn't find requested spool file (${SPOOL_TO}) in ${SECONDS_SINCE} seconds. "
             kill ${SPOOL_PID} 2> /dev/null
             makeFifo
-            break
+            exit ${TIMEOUT}
         fi
 
+        sleep 0.1
         NOW_TIME=$(date -u +"%s")
         SECONDS_SINCE=$((NOW_TIME-START_SPOOL))
-        sleep 0.1
+
     done
 
     rm -f ${SPOOL_TO}

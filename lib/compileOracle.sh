@@ -4,13 +4,6 @@ SUCCESSFUL=0
 INTERPRETER_NOT_FOUND=1
 TIMEOUT=2
 
-#Function declarations
-function startFifodSql {
-    CMD="tail -f ${FIFO_DEST} | ${SQL_INTERPRETER} /nolog"
-    setsid /usr/share/atom/resources/app/apm/bin/node -e "var cp = require('child_process'); cp.exec('${CMD}');" &
-    echo "process should have started?"
-}
-
 #Set up args
 HOST=$1
 PORT=$2
@@ -38,6 +31,14 @@ fi
 
 if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
 
+    #Re-run to make sure the console is available
+    ${LIB_DIR}/backgroundRunner.sh ${PKG_DIR} ${SQL_INTERPRETER}
+
+    if [[ $! -eq ${TIMEOUT} ]]; then
+        echo "Unable to start ${SQL_INTERPRETER} in the background" >&2
+        exit ${TIMEOUT}
+    fi
+
     #Replace values since we aren't calling the script in the traditional way.
     sed ${COMPILE_SCRIPT} \
     -e "s|&1|${USER}|" \
@@ -58,6 +59,8 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
 
         if [[ "${SECONDS_SINCE}" -ge "${MAX_TIME}" ]]; then
             echo "Script took longer than expected" >&2
+            cat ${SPOOL_TO}
+            rm -f ${SPOOL_TO}
             exit ${TIMEOUT}
         fi
 
@@ -66,6 +69,9 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
             rm -f ${SPOOL_TO}
             exit ${SUCCESSFUL}
         fi
+        sleep 0.1
+        NOW_TIME=$(date -u +"%s")
+        SECONDS_SINCE=$((NOW_TIME-START_CHECK_TIME))
 
     done
 

@@ -1,0 +1,10 @@
+[
+    {
+        "targetName" : "hr: dev",
+        "host" : "example.com",
+        "sid" : "xe",
+        "port" : 1521,
+        "user" : "hr",
+        "password" : "hr"
+    }
+] 

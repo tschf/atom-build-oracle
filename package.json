@@ -21,6 +21,9 @@
     "scripts" : {
 
     },
+    "package-deps" : [
+        "build"
+    ],
     "keywords" : [
         "build",
         "compile",

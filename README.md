@@ -26,7 +26,7 @@ After installation, you should be able to find it listed under community package
 
 ![](https://cloud.githubusercontent.com/assets/1747643/11413140/e4b75b26-9439-11e5-86f5-7bb7dcb19b39.png)
 
-Once installed, you will want to access the settings and set the relevant path for your SQL interpreter. That will be either SQLcl or SQL*Plus. For me, I have `sqlplus` in my `path` - so no change is necessary. If I wanted to point it to the binary for `SQLcl`, which isn't in my `path`, I would set the configuration to `/opt/sqlcl/bin/sql`.
+Once installed, you will want to access the settings and set the relevant path for your SQL interpreter. That will be either SQLcl or SQL*Plus. For me, I have `sqlplus` in my `path` so no change is necessary (there is an issue where PATH may not be correctly set in Atom, in that case you should set the full path of `sqlplus`). If I wanted to point it to the binary for `SQLcl`, which isn't in my `path`, I would set the configuration to `/opt/sqlcl/bin/sql`.
 
 ![](https://cloud.githubusercontent.com/assets/1747643/11413201/79fcaa10-943a-11e5-881f-1715ef163e29.png)
 

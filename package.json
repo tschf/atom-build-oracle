@@ -11,7 +11,7 @@
         "builder" : {
             "description" : "Runs SQL*Plus",
             "versions" : {
-                "1.0.0" : "provideBuilder"
+                "2.0.0" : "provideBuilder"
             }
         }
     },

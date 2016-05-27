@@ -6,7 +6,7 @@ This package requires [atom-build](https://atom.io/packages/build) to be install
 
 ## Installation
 
-Currently, this package has not been published to Atoms package repository. To install, clone the this repository to your atom package dir (`~/.atom/packages`). The repository name is not a 1-to-1 match to the plugin name, so it needs to be renamed to `build-oracle`. This can be done in the `git clone` command by specifying the distination directory. The output should be similar to:
+First you will want to install the build package `apm install build`. Currently, this package has not been published to Atoms package repository. To install, clone the this repository to your atom package dir (`~/.atom/packages`). The repository name is not a 1-to-1 match to the plugin name, so it needs to be renamed to `build-oracle`. This can be done in the `git clone` command by specifying the distination directory. The output should be similar to:
 
 ```bash
 $ cd ~/.atom/packages
@@ -56,3 +56,9 @@ Since this file contains sensitive information (password) you will likely also w
 ```
 
 It's worth noting, that to get the build system to recognise the above configuration, you will need to reload atom (only the first time). This can be done in the menu `View->Reload` or with the keyboard shortcut `ctrl+alt+r`.
+
+This plugin is an extension to the `build` system, providing the necessary scripts to compile Oracle code. The build triggers are determined as part of the over-arching `build` package. To build the active file is done with the keyboard shortcut `ctrl+alt+b` or `cmd+alt+b` or `f9`. By default, this will be the first entry in your build config file. The active build target can be switched with `f7`, which will also trigger a build on the active file:
+
+![](https://cloud.githubusercontent.com/assets/1747643/15595301/2eeb787e-2401-11e6-9b89-f138d261c122.png)
+
+The build panel (with build output) can be toggled with `f8`.

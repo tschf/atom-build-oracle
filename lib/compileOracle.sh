@@ -40,8 +40,7 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
     fi
 
     #Replace values since we aren't calling the script in the traditional way.
-    sed ${COMPILE_SCRIPT} \
-    -e "s|&1|${USER}|" \
+    sed -e "s|&1|${USER}|" \
     -e "s|&2|${PASSWORD}|" \
     -e "s|&3|${HOST}|" \
     -e "s|&4|${PORT}|" \
@@ -49,7 +48,8 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
     -e "s|&6|${SQL_CODE_FILE}|" \
     -e "s|--SPOOL|SPOOL|" \
     -e "s|SPOOLTOPATH|${SPOOL_TO}|" \
-    -e "s|--CONFIRMCOMPILATION|exec dbms_output.put_line('COMPILE_COMPLETE');|" > ${FIFO_DEST}
+    -e "s|--CONFIRMCOMPILATION|exec dbms_output.put_line('COMPILE_COMPLETE');|" \
+    ${COMPILE_SCRIPT} > ${FIFO_DEST}
 
     MAX_TIME=10 #We should exit if it takes more than 10 seconds
     START_CHECK_TIME=$(date -u +"%s")

@@ -21,6 +21,7 @@ FALSE_VALUE=false
 LIB_DIR=${PKG_DIR}/lib
 TMP_DIR=${PKG_DIR}/tmp
 COMPILE_SCRIPT=${LIB_DIR}/compile.sql
+COMPILE_SCRIPT_SIMPLE=${LIB_DIR}/compileSimple.sql
 SPOOL_TO=${TMP_DIR}/spooledCompilation.txt
 FIFO_DEST=${TMP_DIR}/sqlconsole
 
@@ -76,6 +77,6 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
     done
 
 else
-    echo "exit" | ${SQL_INTERPRETER} /nolog @${COMPILE_SCRIPT} ${USER} ${PASSWORD} ${HOST} ${PORT} ${SID} ${SQL_CODE_FILE}
+    ${SQL_INTERPRETER} ${USER}/${PASSWORD}@//${HOST}:${PORT}/${SID} @${COMPILE_SCRIPT_SIMPLE} ${SQL_CODE_FILE}
     exit ${SUCCESSFUL}
 fi

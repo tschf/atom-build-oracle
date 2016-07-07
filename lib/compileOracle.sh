@@ -77,6 +77,7 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
     done
 
 else
-    ${SQL_INTERPRETER} ${USER}/${PASSWORD}@//${HOST}:${PORT}/${SID} @${COMPILE_SCRIPT_SIMPLE} ${SQL_CODE_FILE}
+    echo ${SQL_INTERPRETER} ${USER}/${PASSWORD}@//${HOST}:${PORT}/${SID} @\"${COMPILE_SCRIPT_SIMPLE}\" \"${SQL_CODE_FILE}\"
+    #echo @\"${COMPILE_SCRIPT_SIMPLE}\"
     exit ${SUCCESSFUL}
 fi

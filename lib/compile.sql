@@ -14,7 +14,7 @@ COLUMN NOW FORMAT A40
 --Show the details of the connection for confirmation
 select user MY_USER, ora_database_name DB, systimestamp NOW from dual;
 
-@&6
+@"&6"
 
 COLUMN MY_USER 	CLEAR
 COLUMN DB 	    CLEAR

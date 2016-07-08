@@ -48,7 +48,7 @@ In your project root directory, add a JSON file named `.atom-build-oracle.json`,
 ```
 
 Where you can specify any number of build targets.
-If your database server uses ServiceNames instead of SID, you can enter the ServiceName in the property "sid" nonetheless.
+If your database server uses service names instead of SID, you can enter the service name in the property "sid" nonetheless.
 
 Since this file contains sensitive information (password) you will likely also want to add an entry to your `.gitignore` file so this is not published.
 

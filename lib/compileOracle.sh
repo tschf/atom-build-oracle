@@ -52,7 +52,7 @@ if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then
     -e "s|--CONFIRMCOMPILATION|exec dbms_output.put_line('COMPILE_COMPLETE');|" \
     ${COMPILE_SCRIPT} > ${FIFO_DEST}
 
-    MAX_TIME=10 #We should exit if it takes more than 10 seconds
+    MAX_TIME=30 #We should exit if it takes more than 30 seconds
     START_CHECK_TIME=$(date -u +"%s")
     SECONDS_SINCE=0
     #Wait for the above process to finish (or exceeds the max time)

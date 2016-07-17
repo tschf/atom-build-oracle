@@ -4,6 +4,46 @@ Uses the [atom-build](https://atom.io/packages/build) package to execute Oracle 
 
 This package requires [atom-build](https://atom.io/packages/build) to be installed.
 
+## Prerequisites
+
+To be able to compile your code, you need either `SQL*Plus` or `SQLcl` available on your system - preferably in your PATH. `SQL*Plus` requires more steps to get set up (such as installing the instant client), but you will get much faster compile times so that is the preferred interpreter (`SQLcl` is Java based, so launching the JVM each time adds to the compile time).
+
+### SQL*Plus set up
+
+#### OS X
+
+You may face issues depending on how you set up the instant client. The [typical guide](https://docs.oracle.com/cd/E11882_01/install.112/e38228/inst_task.htm#BABHEBIG) involves setting an environment variable `DYLD_LIBRARY_PATH`. Unforunately, in OS X El Capitan, this variable is not passed in as an environment variable into Atom (this is a part of security measure known as System Integrity Protection). You can also see that this is not output if you run the `env` command on the terminal. 
+
+If you followed these steps to install the oracle client, and try to compile in Atom, most likely this is the error you will get:
+
+```
+dyld: Library not loaded: /ade/dosulliv_sqlplus_mac/oracle/sqlplus/lib/libsqlplus.dylib
+  Referenced from: /opt/Oracle/instantclient_11_2/sqlplus
+  Reason: image not found
+Trace/BPT trap: 5
+```
+
+So, instead of setting `DYLD_LIBRARY_PATH`, you can make all the libaries available in a location that `SQL*Plus` knows where to look for them. Two common locations are `~/lib` or `/usr/local/lib`. So, assuming you placed the instant client at `/opt/Oracle/instantclient_11_2`, run the following:
+
+```bash
+sudo mkdir -p /usr/local/lib
+sudo ln -s /opt/Oracle/instantclient_11_2/libclntsh.dylib.11.1 /usr/local/lib/libclntsh.dylib.11.1
+sudo ln -s /opt/Oracle/instantclient_11_2/libnnz11.dylib /usr/local/lib/libnnz11.dylib
+sudo ln -s /opt/Oracle/instantclient_11_2/libociei.dylib /usr/local/lib/libociei.dylib
+sudo ln -s /opt/Oracle/instantclient_11_2/libsqlplus.dylib /usr/local/lib/libsqlplus.dylib
+sudo ln -s /opt/Oracle/instantclient_11_2/libsqlplusic.dylib /usr/local/lib/libsqlplusic.dylib
+```
+
+Ensure your `PATH` is set up with the instant client directory on it so that `sqlplus` is on it. In your `~/.bash_profile` add the line:
+
+```bash
+export PATH=/opt/Oracle/instantclient_11_2:$PATH
+```
+
+I went with `/usr/local/lib` rather than `~/lib` so to not fill up my home directory. Aside from that difference, this is much as what is described on the [download page](http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html) of the instant client (down the bottom of the page).
+
+If you previously set up `DYLD_LIBRARY_PATH` you can unset that and you should be good to go.
+
 ## Installation
 
 First you will want to install the build package `apm install build`. Currently, this package has not been published to Atoms package repository. To install, clone the this repository to your atom package dir (`~/.atom/packages`). The repository name is not a 1-to-1 match to the plugin name, so it needs to be renamed to `build-oracle`. This can be done in the `git clone` command by specifying the distination directory. The output should be similar to:

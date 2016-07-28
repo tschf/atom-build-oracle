@@ -12,7 +12,7 @@ To be able to compile your code, you need either `SQL*Plus` or `SQLcl` available
 
 #### OS X
 
-You may face issues depending on how you set up the instant client. The [typical guide](https://docs.oracle.com/cd/E11882_01/install.112/e38228/inst_task.htm#BABHEBIG) involves setting an environment variable `DYLD_LIBRARY_PATH`. Unforunately, in OS X El Capitan, this variable is not passed in as an environment variable into Atom (this is a part of security measure known as System Integrity Protection). You can also see that this is not output if you run the `env` command on the terminal. 
+You may face issues depending on how you set up the instant client. The [typical guide](https://docs.oracle.com/cd/E11882_01/install.112/e38228/inst_task.htm#BABHEBIG) involves setting an environment variable `DYLD_LIBRARY_PATH`. Unforunately, in OS X El Capitan, this variable is not passed in as an environment variable into Atom (this is a part of security measure known as System Integrity Protection). You can also see that this is not output if you run the `env` command on the terminal.
 
 If you followed these steps to install the oracle client, and try to compile in Atom, most likely this is the error you will get:
 
@@ -43,6 +43,12 @@ export PATH=/opt/Oracle/instantclient_11_2:$PATH
 I went with `/usr/local/lib` rather than `~/lib` so to not fill up my home directory. Aside from that difference, this is much as what is described on the [download page](http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html) of the instant client (down the bottom of the page).
 
 If you previously set up `DYLD_LIBRARY_PATH` you can unset that and you should be good to go.
+
+#### Ubuntu/Linux
+
+To be able to run SQL*Plus from Atom, Atom needs to have all the relevant enviornment variables set up. I followed the installation from this [guide](https://help.ubuntu.com/community/Oracle%20Instant%20Client). The guide mentions to set environment variables in a system wide location or `~/.bash_profile`. The guide suggests to install it in a system wide location since you typically only have one Oracle client installed per system. That is a good approach also for Atom, as it will ensure Atom picks up the relevant environment variables. I found that environment variables set in `~/.bash_profile` are not picked up by the (GUI) terminal, and upon further digging I found that `~/.bash_profile` is only picked up when launching a virtual console - see this [post](http://askubuntu.com/questions/121073/why-bash-profile-is-not-getting-sourced-when-opening-a-terminal). The other location you may be tempted to use is `~/.bashrc`, however this is also not a good place as Atom doesn't seem to pick up the environment set up in there, see this [comment](https://github.com/joefitzgerald/go-plus/issues/386#issuecomment-199359955).
+
+So, to sum it up. Either place your Oracle variables in a script at `/etc/profile.d/oracle.sh` (globally set), or place them in `~/.profile` which will get picked up by Atom.
 
 ## Installation
 

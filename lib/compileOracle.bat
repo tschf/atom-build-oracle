@@ -11,9 +11,6 @@ SET PASSWORD=%5
 SET PKG_DIR=%6
 SET SQL_CODE_FILE=%7
 SET SQL_INTERPRETER=%8
-
-REM to get the 10th arg, we need to shift the parameters back a position, 10 becomes 9, etc
-shift
 SET ATOM_NLS_LANG=%9
 
 REM Multi word argument comes with double quotes. When concatenating, it ends up

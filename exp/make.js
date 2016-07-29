@@ -27,6 +27,18 @@ export function provideBuilder(){
             var pkgDir = this.getPackagePath();
             let sqlPath = this.getPackageSetting('sqlPath');
             let nlsLang = this.getPackageSetting('nlsLang');
+            let bgInterpreter = this.getPackageSetting('backgroundInterpreter');
+
+            //if undefined, set to false
+            if (!bgInterpreter){
+                bgInterpreter = false;
+            }
+
+            //start background SQL interpreter when loading the config
+            //this will show if there are any errors at boot up/change of config
+            if (bgInterpreter){
+                this.backgroundStarter();
+            }
 
             var parsedConfig = this.getFileJson(this.oracleBuildConfig);
             var buildTargets = [];
@@ -37,7 +49,7 @@ export function provideBuilder(){
                 const execExtension = isWindows() ? '.bat' : '.sh'
 
                 thisConfig.name = 'Oracle Build::' + currentTarget.targetName;
-                thisConfig.exec = path.join(pkgDir, 'lib','compileOracle' + execExtension);
+                thisConfig.exec = path.join(pkgDir, 'exp','compileOracle' + execExtension);
                 thisConfig.args = [
                     currentTarget.host,
                     currentTarget.port.toString(),
@@ -47,6 +59,7 @@ export function provideBuilder(){
                     pkgDir,
                     "{FILE_ACTIVE}",
                     sqlPath,
+                    bgInterpreter.toString(),
                     nlsLang
                 ];
                 thisConfig.sh = false;
@@ -65,7 +78,9 @@ export function provideBuilder(){
             const errors = [];
 
             for(let i = 0; i < buildOutputLines.length; i++){
+
                 const currentLine = buildOutputLines[i];
+
                 const lineErrorMatches = currentLine.match(/((PLS|ORA)-[\d]+:.+$)/g);
 
                 if (lineErrorMatches && lineErrorMatches.length > 0){
@@ -123,6 +138,21 @@ export function provideBuilder(){
                     }
                 }
             });
+
+            if (!isWindows()){
+                this.bgObserver = atom.config.observe('build-oracle.backgroundInterpreter', (val) => {
+                    //first call, assign the current setting value
+                    if (typeof this.backgroundInterpreter == "undefined"){
+                        this.backgroundInterpreter = val;
+                    } else {
+                        //only if its changed should we `refreshTargets`
+                        if (this.backgroundInterpreter !== val){
+                            this.backgroundInterpreter = val;
+                            evtCallback();
+                        }
+                    }
+                });
+            }
         }
 
         off(){
@@ -135,6 +165,11 @@ export function provideBuilder(){
             if (this.sqlPathObvserver){
                 this.sqlPathObvserver.dispose();
                 this.sqlPathObvserver = undefined;
+            }
+
+            if (this.bgObserver){
+                this.bgObserver.dispose();
+                this.bgObserver = undefined;
             }
         }
 
@@ -160,6 +195,32 @@ export function provideBuilder(){
             delete require.cache[path];
 
             return require(path);
+        }
+
+        backgroundStarter(){
+            //constants. Also defined in backgroundRunner.sh
+            var INTERPRETER_NOT_FOUND = 1;
+
+            var path = require('path');
+            var pkgDir = this.getPackagePath();
+
+            //http://stackoverflow.com/questions/11750041/how-to-create-a-named-pipe-in-node-js
+            //UNIX FIFOs. We don't support them and probably never will
+            if (this.getPackageSetting("backgroundInterpreter") && !isWindows()){
+                var processStarter = require('child_process');
+                var exec = path.join(pkgDir, 'exp', 'backgroundRunner.sh');
+                var tmpDir = path.join(pkgDir, 'tmp');
+                var sqlInterpreter = this.getPackageSetting('sqlPath');
+                var execWithArgs = exec + ' ' + pkgDir + ' ' + sqlInterpreter;
+                var shellStart = processStarter.exec(execWithArgs);
+
+                shellStart.on('exit', function(exitCode){
+                    if (exitCode === INTERPRETER_NOT_FOUND){
+                        atom.notifications.addWarning('The specified SQL interpreter "' + sqlInterpreter + '" can not be found on the system.\
+                        Please correct this in the settings for `build-oracle` otherwise compilations will not succeed.');
+                    }
+                });
+            }
         }
     }
 
@@ -188,6 +249,16 @@ function config(){
         description: 'Specify the NLS_LANG to ensure the correct encoding is used. Format is: [NLS&#95;LANGUAGE]&#95;[NLS&#95;TERRITORY].[NLS&#95;CHARACTERSET].',
         order: 2
     };
+
+    if (!isWindows()){
+        buildConfig.backgroundInterpreter = {
+            title: 'Run interpreter in background?',
+            type: 'boolean',
+            default: false,
+            description: 'Should the SQL interpreter run in the background? (Experimental to reduce execution times with Java based SQLcl)',
+            order: 3
+        };
+    }
 
     return buildConfig;
 }

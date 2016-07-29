@@ -52,25 +52,11 @@ So, to sum it up. Either place your Oracle variables in a script at `/etc/profil
 
 ## Installation
 
-First you will want to install the build package `apm install build`. Currently, this package has not been published to Atoms package repository. To install, clone the this repository to your atom package dir (`~/.atom/packages`). The repository name is not a 1-to-1 match to the plugin name, so it needs to be renamed to `build-oracle`. This can be done in the `git clone` command by specifying the distination directory. The output should be similar to:
+Install through apm or in Atom itself, where the name of the package is `build-oracle`.
 
-```bash
-$ cd ~/.atom/packages
-$ git clone https://github.com/tschf/atom-build-oracle.git build-oracle
-Cloning into 'build-oracle'...
-remote: Counting objects: 142, done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 142 (delta 8), reused 7 (delta 7), pack-reused 133
-Receiving objects: 100% (142/142), 24.07 KiB | 0 bytes/s, done.
-Resolving deltas: 100% (67/67), done.
-Checking connectivity... done.
 ```
-
-(Alternatively, you can clone the project elsewhere on the system and use the command `apm link atom-build-oracle`.)
-
-After installation, you should be able to find it listed under community packages in the relevant settings page.
-
-![](https://cloud.githubusercontent.com/assets/1747643/11413140/e4b75b26-9439-11e5-86f5-7bb7dcb19b39.png)
+apm install build-oracle
+``` 
 
 Once installed, you will want to access the settings and set the relevant path for your SQL interpreter. That will be either SQLcl or SQL*Plus. For me, I have `sqlplus` in my `path` so no change is necessary (there is an issue where PATH may not be correctly set in Atom, in that case you should set the full path of `sqlplus`). If I wanted to point it to the binary for `SQLcl`, which isn't in my `path`, I would set the configuration to `/opt/sqlcl/bin/sql`.
 

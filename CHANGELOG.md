@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+* Set up dependcies to install `atom-build`.
+* Remove redundant installation instructions
+
 ## 1.0.0
 
 * Publish to APM

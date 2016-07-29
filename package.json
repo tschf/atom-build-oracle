@@ -15,8 +15,9 @@
       }
     }
   },
-  "devDependencies": {},
-  "scripts": {},
+  "dependencies": {
+    "atom-package-deps": "4.0.1"
+  },
   "package-deps": [
     "build"
   ],

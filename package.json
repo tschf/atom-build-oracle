@@ -1,39 +1,35 @@
 {
-    "name" : "build-oracle",
-    "version" : "0.1.0",
-    "description" : "Build Oracle PL/SQL code",
-    "repository" : "https://github.com/tschf/atom-build-oracle",
-    "license" : "MIT",
-    "engines" : {
-        "atom" : "^1.0.0"
-    },
-    "providedServices" : {
-        "builder" : {
-            "description" : "Runs SQL*Plus",
-            "versions" : {
-                "2.0.0" : "provideBuilder"
-            }
-        }
-    },
-    "devDependencies" : {
-
-    },
-    "scripts" : {
-
-    },
-    "package-deps" : [
-        "build"
-    ],
-    "keywords" : [
-        "build",
-        "compile",
-        "sqlcl",
-        "sql*plus",
-        "sqlplus",
-        "productivity",
-        "oracle",
-        "pl/sql",
-        "plsql"
-    ],
-    "main" : "lib/make.js"
+  "name": "build-oracle",
+  "version": "1.0.0",
+  "description": "Build Oracle PL/SQL code",
+  "repository": "https://github.com/tschf/atom-build-oracle",
+  "license": "MIT",
+  "engines": {
+    "atom": "^1.0.0"
+  },
+  "providedServices": {
+    "builder": {
+      "description": "Runs SQL*Plus",
+      "versions": {
+        "2.0.0": "provideBuilder"
+      }
+    }
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "package-deps": [
+    "build"
+  ],
+  "keywords": [
+    "build",
+    "compile",
+    "sqlcl",
+    "sql*plus",
+    "sqlplus",
+    "productivity",
+    "oracle",
+    "pl/sql",
+    "plsql"
+  ],
+  "main": "lib/make.js"
 }

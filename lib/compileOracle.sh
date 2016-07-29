@@ -14,6 +14,7 @@ PKG_DIR=$6
 SQL_CODE_FILE=$7
 SQL_INTERPRETER=$8
 RUN_SQL_BG=$9
+ATOM_NLS_LANG=${10}
 
 #Set up constants
 TRUE_VALUE=true
@@ -28,6 +29,10 @@ FIFO_DEST=${TMP_DIR}/sqlconsole
 if [[ ! -e ${TMP_DIR} ]]; then
     echo "${TMP_DIR} does not exist; Creating"
     mkdir -p ${TMP_DIR}
+fi
+
+if [[ -z ${NLS_LANG+x} ]]; then
+    export NLS_LANG=${ATOM_NLS_LANG}
 fi
 
 if [[ ${RUN_SQL_BG} = ${TRUE_VALUE} ]]; then

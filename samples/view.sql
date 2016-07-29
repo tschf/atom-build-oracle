@@ -1,3 +1,6 @@
 create or replace view v_my_view as
-select 'trent' my_name
+select 'Accent char is: ù.' my_name
 from dual;
+
+select *
+from v_my_view;

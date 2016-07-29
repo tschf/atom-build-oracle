@@ -1,6 +1,8 @@
-create or replace view v_my_view as
-select 'Accent char is: ù.' my_name
+create or replace view v_atom_build_view as
+select 'Accent char is: ù.' simple_string
 from dual;
 
 select *
-from v_my_view;
+from v_atom_build_view;
+
+drop view v_atom_build_view;

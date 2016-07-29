@@ -1,7 +1,7 @@
 {
     "name" : "build-oracle",
     "version" : "0.1.0",
-    "description" : "Build Oracle code",
+    "description" : "Build Oracle PL/SQL code",
     "repository" : "https://github.com/tschf/atom-oracle-build",
     "license" : "MIT",
     "engines" : {
@@ -29,8 +29,11 @@
         "compile",
         "sqlcl",
         "sql*plus",
-        "productivity"
-
+        "sqlplus",
+        "productivity",
+        "oracle",
+        "pl/sql",
+        "plsql"
     ],
     "main" : "lib/make.js"
 }

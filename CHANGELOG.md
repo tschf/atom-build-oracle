@@ -1,8 +1,8 @@
 # Changelog
 
-## 1.0.1
+## 1.0.3
 
-* Set up dependcies to install `atom-build`.
+* Set up dependencies to install `atom-build`
 * Remove redundant installation instructions
 
 ## 1.0.0

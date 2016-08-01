@@ -14,7 +14,7 @@ To be able to compile your code, you need either `SQL*Plus` or `SQLcl` available
 
 You may face issues depending on how you set up the instant client. The [typical guide](https://docs.oracle.com/cd/E11882_01/install.112/e38228/inst_task.htm#BABHEBIG) involves setting an environment variable `DYLD_LIBRARY_PATH`. Unforunately, in OS X El Capitan, this variable is not passed in as an environment variable into Atom (this is a part of security measure known as System Integrity Protection). You can also see that this is not output if you run the `env` command on the terminal.
 
-If you followed these steps to install the oracle client, and try to compile in Atom, most likely this is the error you will get:
+If you followed those general steps, you will likely be getting this error (or very similar):
 
 ```
 dyld: Library not loaded: /ade/dosulliv_sqlplus_mac/oracle/sqlplus/lib/libsqlplus.dylib
@@ -23,7 +23,14 @@ dyld: Library not loaded: /ade/dosulliv_sqlplus_mac/oracle/sqlplus/lib/libsqlplu
 Trace/BPT trap: 5
 ```
 
-So, instead of setting `DYLD_LIBRARY_PATH`, you can make all the libaries available in a location that `SQL*Plus` knows where to look for them. Two common locations are `~/lib` or `/usr/local/lib`. So, assuming you placed the instant client at `/opt/Oracle/instantclient_11_2`, run the following:
+Two ways around this.
+
+* In the settings for this plugin, set the path where your client files are (copy what you have for your existing DYLD_LIBRARY_PATH).
+
+--todo image
+
+
+* Or, instead of setting `DYLD_LIBRARY_PATH`, you can make all the libaries available in a location that `SQL*Plus` knows where to look for them. Two common locations are `~/lib` or `/usr/local/lib`. So, assuming you placed the instant client at `/opt/Oracle/instantclient_11_2`, run the following:
 
 ```bash
 sudo mkdir -p /usr/local/lib
@@ -56,7 +63,7 @@ Install through apm or in Atom itself, where the name of the package is `build-o
 
 ```
 apm install build-oracle
-``` 
+```
 
 Once installed, you will want to access the settings and set the relevant path for your SQL interpreter. That will be either SQLcl or SQL*Plus. For me, I have `sqlplus` in my `path` so no change is necessary (there is an issue where PATH may not be correctly set in Atom, in that case you should set the full path of `sqlplus`). If I wanted to point it to the binary for `SQLcl`, which isn't in my `path`, I would set the configuration to `/opt/sqlcl/bin/sql`.
 

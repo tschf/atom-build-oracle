@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+* Add DYLD_LIBRARY_PATH setting for OS X
+
 ## 1.0.3
 
 * Set up dependencies to install `atom-build`

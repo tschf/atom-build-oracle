@@ -27,8 +27,7 @@ Two ways around this.
 
 * In the settings for this plugin, set the path where your client files are (copy what you have for your existing DYLD_LIBRARY_PATH).
 
---todo image
-
+![](https://cloud.githubusercontent.com/assets/1747643/17292642/d2769eea-582e-11e6-8e70-f0bf6f205fc1.png)
 
 * Or, instead of setting `DYLD_LIBRARY_PATH`, you can make all the libaries available in a location that `SQL*Plus` knows where to look for them. Two common locations are `~/lib` or `/usr/local/lib`. So, assuming you placed the instant client at `/opt/Oracle/instantclient_11_2`, run the following:
 

@@ -1,5 +1,9 @@
 # Oracle compiler for Atom
 
+[![apm](https://img.shields.io/apm/l/build-oracle.svg?style=flat-square)](https://atom.io/packages/build-oracle)
+[![apm](https://img.shields.io/apm/v/build-oracle.svg?style=flat-square)](https://atom.io/packages/build-oracle)
+[![apm](https://img.shields.io/apm/dm/build-oracle.svg?style=flat-square)](https://atom.io/packages/build-oracle)
+
 Uses the [atom-build](https://atom.io/packages/build) package to execute Oracle compilations in the Atom editor.
 
 This package requires [atom-build](https://atom.io/packages/build) to be installed.

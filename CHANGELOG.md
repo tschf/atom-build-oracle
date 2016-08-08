@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+* Add support for `connectString` (and with it, tnsnames.ora)
+
 ## 1.4.0
 
 * Add DYLD_LIBRARY_PATH setting for OS X

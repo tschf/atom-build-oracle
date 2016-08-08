@@ -74,8 +74,51 @@ Once installed, you will want to access the settings and set the relevant path f
 
 ## Usage instructions
 
-In your project root directory, add a JSON file named `.atom-build-oracle.json`, where you can define build targets for your project. This contents of the file should look like:
+In your project root directory, add a JSON file named `.atom-build-oracle.json`, where you can define build targets for your project. This contents of the file expects an array of objects, which supports the following parameters:
 
+|Property name  | Description             | Example |
+|---            |---                      | ---     |
+| targetName    | A descriptive name of the build target. This is so you know to which environment you'll be compiling to.       | hr: dev|
+| connectString | The connect string you would used to connect to `sqlplus` on the command line. <br>**note 1:** You *must* specify a password at this stage. <br>**note 2:** `connectString` is the preferred field to use. | - hr/hr@//server:port/sid  <br />- hr/hr@XE1 |
+| host | The server of the database       | example.com |
+| port | The database port                | 1521 |
+| sid  | The database SID or service name | XE |
+| user | The schema name you connect to   | hr |
+| password | The password of the schema   | oracle |
+
+note: `connectString` is built from the other server details if you ommit that setting.
+
+Examples:
+
+Connect string:
+
+Suppose I have the following TNS entry defined:
+
+```
+XE1 =
+    (DESCRIPTION =
+        (ADDRESS_LIST =
+            (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.56.101)(PORT = 1521))
+
+        )
+        (CONNECT_DATA =
+            (SERVICE_NAME = XE)
+        )
+    )
+```
+
+My build file becomes:
+
+```json
+[
+    {
+        "targetName" : "hr: dev",
+        "connectString" : "hr/hr@XE1"
+    }
+]
+```
+
+Individual details:
 ```json
 [
     {

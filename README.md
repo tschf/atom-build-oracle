@@ -81,7 +81,7 @@ In your project root directory, add a JSON file named `.atom-build-oracle.json`,
 | targetName    | A descriptive name of the build target. This is so you know to which environment you'll be compiling to.       | hr: dev|
 | connectString | The connect string you would used to connect to `sqlplus` on the command line. <br>**note 1:** You *must* specify a password at this stage. <br>**note 2:** `connectString` is the preferred field to use. | - hr/hr@//server:port/sid  <br />- hr/hr@XE1 |
 | host | The server of the database       | example.com |
-| port | The database port                | 1521 |
+| port | The database port                | 1521 (default) |
 | sid  | The database SID or service name | XE |
 | user | The schema name you connect to   | hr |
 | password | The password of the schema   | oracle |

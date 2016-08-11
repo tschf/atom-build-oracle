@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.1
+
+* Add default port (Issue [#32](https://github.com/tschf/atom-build-oracle/issues/32))
+* Call sqlplus with the -L argument
+
 ## 1.5.0
 
 * Add support for `connectString` (and with it, tnsnames.ora)

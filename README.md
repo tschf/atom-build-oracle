@@ -60,6 +60,18 @@ To be able to run SQL*Plus from Atom, Atom needs to have all the relevant envior
 
 So, to sum it up. Either place your Oracle variables in a script at `/etc/profile.d/oracle.sh` (globally set), or place them in `~/.profile` which will get picked up by Atom.
 
+### SQLcl set up
+
+#### Windows
+
+An issue you may face on Windows is if you try and compile code containing unicode characters, they won't persist when compiling with SQLcl. The reason is that the JVM doesn't default to UTF-8 encoding on Windows.
+
+To get around this, ensure you point to sql.bat (instead of sql.exe) and also that you have checked "Enforce UTF-8" in the package settings, similar to:
+
+![screenshot from 2016-08-28 17-49-57](https://cloud.githubusercontent.com/assets/1747643/18032450/6bcbdfbe-6d48-11e6-87f0-a471ff298301.png)
+
+When `Enforce UTF-8 encoding` is on, the environment variable `JAVA_OPTS` will be set to `-Dfile.encoding=UTF-8`. This is also discussed on Stack overflow: http://stackoverflow.com/questions/361975/setting-the-default-java-character-encoding
+
 ## Installation
 
 Install through apm or in Atom itself, where the name of the package is `build-oracle`.

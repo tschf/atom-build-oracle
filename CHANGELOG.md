@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.2
+
+* Enable `sqlblanklines`
+
 ## 1.5.1
 
 * Add default port (Issue [#32](https://github.com/tschf/atom-build-oracle/issues/32))

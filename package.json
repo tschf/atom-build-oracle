@@ -16,7 +16,8 @@
     }
   },
   "dependencies": {
-    "atom-package-deps": "4.0.1"
+    "atom-package-deps": "4.0.1",
+    "tmp": "^0.0.31"
   },
   "package-deps": [
     "build"

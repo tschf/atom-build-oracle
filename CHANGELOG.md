@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.1
+
+* Resolve bug with installing dependencies
+
 ## 1.6.0
 
 * Add support for compiling an untitled file
